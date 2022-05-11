@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Alura Challenge Desafio1</title>
+        <link rel="StyleSheet" href="reto1.css" />
+        <div id="titulo">Encriptador de Frases o Palabras</div>
+        <div id="entrada"> 
+            <input type="text" maxlength="5000" id="rectangle_1">
+        </div>
+        <br>
+        <div id="nota">Solo Letras Minúsculas y Sin Acentos</div>
+        <div  id ="buttons">
+            <button name="encriptar" id="button_1" onclick="">Encriptar</button>
+            <button name="desencriptar" id="button_2" onclick="">Desencriptar</button>
+            <button name="copiar" id="button_3" onclick="">Copiar</button>
+        </div>
+        <br>
+        <div id="salida">
+            <textarea name="textarea" rows="10" cols="50" maxlength="5000" id="rectangle_2"></textarea>
+        </div>
+        <br>
+        <div id="pie_pagina">Diseñado y Desarrollado por Juan K Morales G - Bogotá Colombia</div>
+        
+    </head>
+
+    <script type="text/javascript">
+        var input = document.querySelector("input");
+        var output = document.querySelector("textarea");
+        var palabra;
+        var salida="";
+        var respuesta=[];
+        var des="";
+        input.focus();
+
+        function copy(){
+            let copyText = document.querySelector("#rectangle_2");
+            copyText.select();
+            document.execCommand("copy");
+        }
+        document.querySelector("#button_3").addEventListener("click",copy);
+
+        function encriptar(){
+            palabra="";
+            salida="";
+            respuesta=[];
+            palabra = input.value;
+            for(var x=0; x<palabra.length;x++){
+                if(palabra[x]=="a"){
+                    respuesta.push("ai");
+                }
+                if(palabra[x]=="e"){
+                    respuesta.push("enter");
+                }
+                if(palabra[x]=="i"){
+                    respuesta.push("imes");
+                }
+                if(palabra[x]=="o"){
+                    respuesta.push("ober");
+                }
+                if(palabra[x]=="u"){
+                    respuesta.push("ufat");
+                }
+                if(palabra[x]!="a" && palabra[x]!="e"&& palabra[x]!="i"&& palabra[x]!="o"&& palabra[x]!="u"){
+                    respuesta.push(palabra[x]);
+                }
+            }
+            for(var y=0; y<respuesta.length;y++){
+                salida = salida + respuesta[y];
+            }
+            output.value = salida;
+        }
+
+        function desencriptar(){
+            palabra="";
+            salida="";
+            respuesta=[];
+            palabra = input.value;
+            console.log(input);
+
+            for(var x=0; x<palabra.length;x++){
+                if(palabra[x]!="a" && palabra[x]!="e"&& palabra[x]!="i"&& palabra[x]!="o"&& palabra[x]!="u"){
+                    respuesta.push(palabra[x]);
+                }
+                if(palabra[x]=="a" && palabra[x+1]=="i"){
+                    respuesta.push("a");
+                    x=x+1;
+                }
+                if(palabra[x]=="e" && palabra[x+1]=="n" && palabra[x+2]=="t"&& palabra[x+3]=="e"&& palabra[x+4]=="r"){
+                    respuesta.push("e");
+                    x=x+4;
+                }
+                if(palabra[x]=="i" && palabra[x+1]=="m" && palabra[x+2]=="e"&& palabra[x+3]=="s"){
+                    respuesta.push("i");
+                    x=x+3;
+                }
+                if(palabra[x]=="o" && palabra[x+1]=="b" && palabra[x+2]=="e"&& palabra[x+3]=="r"){
+                    respuesta.push("o");
+                    x=x+3;
+                }
+                if(palabra[x]=="u" && palabra[x+1]=="f" && palabra[x+2]=="a"&& palabra[x+3]=="t"){
+                    respuesta.push("u");
+                    x=x+3;
+                }
+            }
+            for(var y=0; y<respuesta.length;y++){
+                salida = salida + respuesta[y];
+            }
+            output.value = salida;
+        }
+        
+        var boton1 = document.querySelector("#button_1");
+        var boton2 = document.querySelector("#button_2");
+        
+        boton1.onclick = encriptar;
+        boton2.onclick = desencriptar;
+        
+    </script>
+    
+</html>
